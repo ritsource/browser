@@ -1,2 +1,4 @@
 # navigator
-Building a web browser from scratch, networking and layout.
+A web browser from scratch in Rust.
+
+Ref - [howbrowserswork](https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/)
