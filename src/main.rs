@@ -1,18 +1,12 @@
-extern crate gtk;
-use gtk::prelude::*;
-use gtk::{ButtonsType, DialogFlags, MessageDialog, MessageType, Window};
+mod dom;
+
+use dom::node::Node;
+use dom::tree::Tree;
 
 fn main() {
-    if gtk::init().is_err() {
-        println!("Failed to initialize GTK.");
-        return;
+    let mut parent = Node::new();
+    {
+        parent.append_child(Node::new());
     }
-    MessageDialog::new(
-        None::<&Window>,
-        DialogFlags::empty(),
-        MessageType::Info,
-        ButtonsType::Ok,
-        "Hello World",
-    )
-    .run();
+    println!("Length - {}", parent.children_count());
 }
