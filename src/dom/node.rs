@@ -1,24 +1,37 @@
+use crate::elements::elem::Elem;
+
 #[allow(dead_code)]
 pub struct Node {
-    data: Option<()>,
-    children: Vec<Node>,
+    pub element: Elem,
+    pub children: Vec<Node>,
 }
 
 #[allow(dead_code)]
 impl Node {
     pub fn new() -> Self {
         Self {
-            data: None,
+            element: Elem::new(),
             children: vec![],
         }
     }
 
-    pub fn get_data(&self) -> Option<()> {
-        self.data
+    pub fn from(elem: Elem) -> Self {
+        Self {
+            element: elem,
+            children: vec![],
+        }
     }
 
-    pub fn update_data(&mut self, data: Option<()>) {
-        self.data = data;
+    pub fn from_tag_name(tag_name: &str) -> Self {
+        Self::from(Elem::from(tag_name))
+    }
+
+    // pub fn get_element(&self) -> Elem {
+    //     self.element
+    // }
+
+    pub fn update_element(&mut self, elem: Elem) {
+        self.element = elem;
     }
 
     pub fn get_child(&self, index: usize) -> &Node {
