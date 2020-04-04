@@ -1,8 +1,10 @@
+#[allow(dead_code)]
 pub struct Node {
     data: Option<()>,
     children: Vec<Node>,
 }
 
+#[allow(dead_code)]
 impl Node {
     pub fn new() -> Self {
         Self {
@@ -11,9 +13,12 @@ impl Node {
         }
     }
 
-    pub fn update_data(&mut self, data: Option<()>) -> Self {
+    pub fn get_data(&self) -> Option<()> {
+        self.data
+    }
+
+    pub fn update_data(&mut self, data: Option<()>) {
         self.data = data;
-        *self
     }
 
     pub fn get_child(&self, index: usize) -> &Node {
