@@ -1,5 +1,5 @@
 #[allow(dead_code)]
-pub enum ElemType {
+pub enum Tag {
     H1,
     H2,
     P,
@@ -27,9 +27,9 @@ pub enum ElemType {
 }
 
 #[allow(dead_code)]
-impl ElemType {
-    pub fn from(tag: &str) -> ElemType {
-        use ElemType::*;
+impl Tag {
+    pub fn from(tag: &str) -> Tag {
+        use Tag::*;
 
         match tag {
             "h1" => H1,

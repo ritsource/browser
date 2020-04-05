@@ -1,9 +1,10 @@
-use super::elemtype::ElemType;
-use super::props::{Attributes, Styles};
+use super::attrs::Attributes;
+use super::styles::Styles;
+use super::tag::Tag;
 
 #[allow(dead_code)]
 pub struct Elem {
-    pub tag: ElemType,
+    pub tag: Tag,
     pub attributes: Attributes,
     pub styles: Styles,
 }
@@ -18,7 +19,7 @@ impl Elem {
         Self {
             attributes: Attributes::default(),
             styles: Styles::default(),
-            tag: ElemType::from(tagname),
+            tag: Tag::from(tagname),
         }
     }
 

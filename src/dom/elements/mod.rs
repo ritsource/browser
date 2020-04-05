@@ -1,7 +1,9 @@
+mod attrs;
 mod elem;
-mod elemtype;
-mod props;
+mod styles;
+mod tag;
 
+pub use attrs::*;
 pub use elem::*;
-pub use elemtype::*;
-pub use props::*;
+pub use styles::*;
+pub use tag::*;

@@ -1,8 +1,9 @@
+mod cssom;
 mod dom;
 
+use dom::document::Document;
 use dom::elements::Elem;
 use dom::node::Node;
-use dom::tree::Document;
 
 fn main() {
     let mut dom = Document::new();

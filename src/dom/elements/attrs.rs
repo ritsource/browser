@@ -27,7 +27,6 @@ impl Default for Attributes {
 }
 
 #[allow(dead_code)]
-#[derive(Copy, Clone)]
 pub struct Styles();
 
 impl Default for Styles {

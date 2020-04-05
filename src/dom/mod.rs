@@ -1,3 +1,3 @@
+pub mod document;
 pub mod elements;
 pub mod node;
-pub mod tree;
