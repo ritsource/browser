@@ -1,5 +1,5 @@
 #[allow(dead_code)]
-pub enum Tag {
+pub enum ElemType {
     H1,
     H2,
     P,
@@ -21,12 +21,15 @@ pub enum Tag {
     Form,
     Label,
     Input,
+    Meta,
+    Link,
+    UNSUPPORTED,
 }
 
 #[allow(dead_code)]
-impl Tag {
-    pub fn from(tag: &str) -> Tag {
-        use Tag::*;
+impl ElemType {
+    pub fn from(tag: &str) -> ElemType {
+        use ElemType::*;
 
         match tag {
             "h1" => H1,
@@ -50,7 +53,9 @@ impl Tag {
             "from" => Form,
             "label" => Label,
             "input" => Input,
-            _ => Div,
+            "meta" => Meta,
+            "link" => Link,
+            _ => UNSUPPORTED,
         }
     }
 }

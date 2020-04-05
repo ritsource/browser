@@ -1,37 +1,34 @@
-use crate::elements::elem::Elem;
+use super::elements::Elem;
 
 #[allow(dead_code)]
 pub struct Node {
-    pub element: Elem,
+    pub data: NodeData,
     pub children: Vec<Node>,
+}
+
+pub enum NodeData {
+    Elem(Elem),
+    Text(String),
 }
 
 #[allow(dead_code)]
 impl Node {
-    pub fn new() -> Self {
+    pub fn from_elem(elem: Elem) -> Self {
         Self {
-            element: Elem::new(),
+            data: NodeData::Elem(elem),
             children: vec![],
         }
     }
 
-    pub fn from(elem: Elem) -> Self {
+    pub fn from_text(text: String) -> Self {
         Self {
-            element: elem,
+            data: NodeData::Text(text),
             children: vec![],
         }
     }
 
-    pub fn from_tag_name(tag_name: &str) -> Self {
-        Self::from(Elem::from(tag_name))
-    }
-
-    // pub fn get_element(&self) -> Elem {
-    //     self.element
-    // }
-
-    pub fn update_element(&mut self, elem: Elem) {
-        self.element = elem;
+    pub fn get_data(&mut self) -> &mut NodeData {
+        &mut self.data
     }
 
     pub fn get_child(&self, index: usize) -> &Node {

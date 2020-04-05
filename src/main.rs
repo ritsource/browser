@@ -1,21 +1,20 @@
 mod dom;
-mod elements;
 
+use dom::elements::Elem;
 use dom::node::Node;
-use dom::tree::Tree;
-use elements::elem::Elem;
+use dom::tree::Document;
 
 fn main() {
-    let mut dom = Tree::new();
+    let mut dom = Document::new();
 
     let html = String::from("<a href=\"https://wikipedia.com\">Wikipedia</a>");
     let elem = naive_parse(html);
 
-    dom.append_child(Node::from(elem));
+    dom.add_root(Node::from_elem(elem));
 }
 
 fn naive_parse(_: String) -> Elem {
-    use elements::props::Attributes;
+    use dom::elements::Attributes;
     use std::collections::HashMap;
 
     let (tag_name, attr_map) = {
