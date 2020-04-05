@@ -31,3 +31,54 @@ by [howbrowserswork](https://www.html5rocks.com/en/tutorials/internals/howbrowse
 ![A diagram](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/images/cssom-tree.png)
 
 source [developers.google.com](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/constructing-the-object-model)
+
+# StyleSheet Structure
+```css
+span {
+    d1; d2; d3;
+}
+div > p > span {
+    d3; d4;
+}
+p > span {
+    d5; d6;
+}
+h1 -> span {
+    d7; d8;
+}
+nav span {
+    d9; d10;
+}
+```
+
+> RESULT STYLESHEET
+
+```javascript
+const StyleSheet = [
+    { // Span
+        declerations: [ d1, d2, d3 ],
+        direct_parents: [
+            { // P
+                declerations: [ d5, d6 ],
+                parents: [
+                    { // Div
+                        declerations: [ d3, d4 ],
+                        parents: []
+                    }
+                ]
+            },
+            { // H1
+                declerations: [ d7, d8 ],
+                parents: []
+            }
+        ],
+        parents: [
+            { // Nav
+                declerations: [ d9, d10 ],
+                parents: []
+            }
+        ]
+    }
+];
+```
+
