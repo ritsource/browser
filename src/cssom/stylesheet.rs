@@ -1,17 +1,9 @@
-// use std::collections::HashMap;
-
-use crate::dom::elements::Tag;
-
 use super::declaration::Decleration;
+use crate::dom::elements::Tag;
+use std::collections::HashMap;
 
 #[allow(dead_code)]
-pub struct StyleSheet(Vec<CssRule>);
-
-#[allow(dead_code)]
-pub struct CssRule {
-    pub selectors: Vec<Selector>,
-    pub declarations: Vec<Decleration>,
-}
+pub struct StyleSheet(HashMap<Selector, Decleration>);
 
 #[allow(dead_code)]
 pub enum Selector {
