@@ -1,6 +1,8 @@
-use std::collections::HashMap;
+// use std::collections::HashMap;
 
 use crate::dom::elements::Tag;
+
+use super::declaration::Decleration;
 
 #[allow(dead_code)]
 pub struct StyleSheet(Vec<CssRule>);
@@ -8,7 +10,7 @@ pub struct StyleSheet(Vec<CssRule>);
 #[allow(dead_code)]
 pub struct CssRule {
     pub selectors: Vec<Selector>,
-    pub declaration: Vec<HashMap<String, String>>,
+    pub declarations: Vec<Decleration>,
 }
 
 #[allow(dead_code)]
