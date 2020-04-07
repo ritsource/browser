@@ -13,14 +13,14 @@ pub enum Selector {
 }
 
 #[allow(dead_code)]
-pub struct Selection {
+pub struct CSSRule {
     declerations: Vec<Decleration>,
-    direct_parents: Vec<Selection>,
-    parents: Vec<Selection>,
+    parent: HashMap<Selector, CSSRule>,
+    ancestor: HashMap<Selector, CSSRule>,
 }
 
 #[allow(dead_code)]
-pub struct StyleSheet(HashMap<Selector, Selection>);
+pub struct StyleSheet(HashMap<Selector, CSSRule>);
 
 #[allow(dead_code)]
 impl StyleSheet {}
