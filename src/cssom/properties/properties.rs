@@ -1,5 +1,6 @@
 pub struct Integer(i32);
 
+#[allow(dead_code)]
 pub enum Measure {
     Px(f64),
     Percent(f64),
@@ -7,8 +8,10 @@ pub enum Measure {
     Auto,
 }
 
+#[allow(dead_code)]
 pub struct Color(String);
 
+#[allow(dead_code)]
 impl Color {
     pub fn to_hex(self) -> String {
         self.0
@@ -64,7 +67,6 @@ pub enum Property {
     // Font,
     // FontFamily(Vec<String>),
     FontSize(Measure),
-    FontStyle(FontStyle),
     FontWeight(FontWeight),
     LetterSpacing(Measure),
     LineHeight(Measure),
@@ -91,266 +93,147 @@ pub enum Property {
     ZIndex(Integer),
 }
 
+#[allow(dead_code)]
 pub enum AlignContent {
-    F,
+    Normal,
+    Center,
+    Start,
+    End,
+    SpaceBetween,
+    SpaceAround,
+    Baseline,
+    Streach,
 }
 
+#[allow(dead_code)]
 pub enum AlignItems {
-    F,
+    Normal,
+    Center,
+    Start,
+    End,
+    Baseline,
+    Streach,
 }
 
+#[allow(dead_code)]
 pub enum AlignSelf {
-    F,
+    Auto,
+    Normal,
+    Center,
+    Start,
+    End,
+    Baseline,
+    Streach,
 }
 
+#[allow(dead_code)]
 pub enum JustifyContent {
-    F,
+    Normal,
+    Center,
+    Start,
+    End,
+    Left,
+    Right,
+    Streach,
 }
 
+#[allow(dead_code)]
 pub enum VerticalAlign {
-    F,
+    Middle,
+    Top,
+    Bottom,
+    Baseline,
 }
 
-pub enum Background {
-    F,
-}
-
-pub enum BackgroundColor {
-    F,
-}
-
-pub enum BackgroundImage {
-    F,
-}
-
+#[allow(dead_code)]
 pub enum BorderStyle {
-    F,
+    Solid,
+    Dotted,
+    Dashed,
+    None,
 }
 
-pub enum BorderTopWidth {
-    F,
-}
-
-pub enum BorderTopStyle {
-    F,
-}
-
-pub enum BorderTopColor {
-    F,
-}
-
-pub enum BorderBottomWidth {
-    F,
-}
-
-pub enum BorderBottomStyle {
-    F,
-}
-
-pub enum BorderBottomColor {
-    F,
-}
-
-pub enum BorderLeftWidth {
-    F,
-}
-
-pub enum BorderLeftStyle {
-    F,
-}
-
-pub enum BorderLeftColor {
-    F,
-}
-
-pub enum BorderRightWidth {
-    F,
-}
-
-pub enum BorderRightStyle {
-    F,
-}
-
-pub enum BorderRightColor {
-    F,
-}
-
-pub enum BorderTopLeftRadius {
-    F,
-}
-
-pub enum BorderTopRightRadius {
-    F,
-}
-
-pub enum BorderBottomLeftRadius {
-    F,
-}
-
-pub enum BorderBottomRightRadius {
-    F,
-}
-
-pub enum Height {
-    F,
-}
-
-pub enum MaxHeight {
-    F,
-}
-
-pub enum MinHeight {
-    F,
-}
-
-pub enum MaxWidth {
-    F,
-}
-
-pub enum MinWidth {
-    F,
-}
-
-pub enum Bottom {
-    F,
-}
-
-pub enum MarginTop {
-    F,
-}
-
-pub enum MarginBottom {
-    F,
-}
-
-pub enum MarginLeft {
-    F,
-}
-
-pub enum MarginRight {
-    F,
-}
-
-pub enum PaddingTop {
-    F,
-}
-
-pub enum PaddingBottom {
-    F,
-}
-
-pub enum PaddingLeft {
-    F,
-}
-
-pub enum PaddingRight {
-    F,
-}
-
-pub enum FontFamily {
-    F,
-}
-
-pub enum FontSize {
-    F,
-}
-
-pub enum FontStyle {
-    F,
-}
-
+#[allow(dead_code)]
 pub enum FontWeight {
-    F,
+    Normal,
+    Bold,
+    Integer(Integer),
 }
 
-pub enum LetterSpacing {
-    F,
-}
-
-pub enum LineHeight {
-    F,
-}
-
+#[allow(dead_code)]
 pub enum TextAlign {
-    F,
+    Left,
+    Right,
+    Center,
+    Start,
+    End,
+    Justify,
 }
 
+#[allow(dead_code)]
 pub enum TextDecoration {
-    F,
+    Underline,
+    LineThrough,
+    None,
 }
 
+#[allow(dead_code)]
 pub enum Cursor {
-    F,
+    Default,
+    Pointer,
+    Text,
 }
 
+#[allow(dead_code)]
 pub enum Display {
-    F,
+    Inline,
+    InlineBlock,
+    Block,
+    Flex,
+    None,
 }
 
-pub enum FlexBasis {
-    F,
-}
-
+#[allow(dead_code)]
 pub enum FlexDirection {
-    F,
+    Row,
+    RowReverse,
+    Column,
+    ColumnReverse,
+    Inherit,
 }
 
-pub enum FlexFlow {
-    F,
-}
-
-pub enum FlexGrow {
-    F,
-}
-
-pub enum FlexShrink {
-    F,
-}
-
-pub enum FlexWrap {
-    F,
-}
-
+#[allow(dead_code)]
 pub enum Opacity {
-    F,
+    Integer(Integer),
 }
 
+#[allow(dead_code)]
 pub enum Visibility {
-    F,
+    Visible,
+    Hidden,
+    Collapse,
+    Inherit,
 }
 
-pub enum OutlineWidth {
-    F,
-}
-
+#[allow(dead_code)]
 pub enum OutlineStyle {
-    F,
+    Solid,
+    Dashed,
 }
 
-pub enum OutlineColor {
-    F,
-}
-
-pub enum OutlineOffset {
-    F,
-}
-
+#[allow(dead_code)]
 pub enum Overflow {
-    F,
+    Visible,
+    Hidden,
+    Auto,
+    Scroll,
 }
 
-pub enum OverflowX {
-    F,
-}
-
-pub enum OverflowY {
-    F,
-}
-
+#[allow(dead_code)]
 pub enum Position {
-    F,
-}
-
-pub enum ZIndex {
-    F,
+    Static,
+    Relative,
+    Absolute,
+    Sticky,
+    Fixed,
 }
