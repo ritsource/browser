@@ -1,0 +1,25 @@
+span {
+    color: #ff0000;
+}
+
+p > span {
+    background: #000000;
+}
+
+div > p > span {
+    margin: 0px 10px 0px 10px;
+}
+
+p > span {
+    color: #ffff00;
+}
+
+nav {
+    background: #ff0000;
+    height: 100px;
+    width: 100px;
+}
+
+footer > span {
+    font-weight: bold;
+}
