@@ -123,3 +123,54 @@ pub fn get_test_stylesheet<'a>() -> StyleSheet {
         nav => rule_4
     })
 }
+
+//
+// implemented for HTML ...
+//
+// <html lang="en">
+// <head>
+// </head>
+// <body>
+//     <nav></nav>
+//     <div>
+//         <h1>Some 1</h1>
+//         <p>this is <span>p tag</span> under div</p>
+//         <h1>Some 2</h1>
+//         <p>anopther p tag</p>
+//     </div>
+//     <footer></footer>
+// </body>
+// </html>
+//
+// And,
+//
+// implemented for CSS ...
+//
+// ```
+// span {
+//     color: #ff0000;
+// }
+//
+// p > span {
+//     background: #000000;
+// }
+//
+// div > p > span {
+//     margin: 0px 10px 0px 10px;
+// }
+//
+// p > span {
+//     color: #ffff00;
+// }
+//
+// nav {
+//     background: #ff0000;
+//     height: 100px;
+//     width: 100px;
+// }
+//
+// footer -> span {
+//     font-weight: bold;
+// }
+//
+// ```
