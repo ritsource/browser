@@ -10,6 +10,10 @@ impl Document {
     pub fn new() -> Self {
         Self { root: None }
     }
+    pub fn with_root(mut self, root: Node) -> Self {
+        self.root = Some(root);
+        self
+    }
 
     pub fn add_root(&mut self, root: Node) {
         self.root = Some(root);

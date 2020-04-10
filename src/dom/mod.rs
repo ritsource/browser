@@ -1,3 +1,9 @@
-pub mod document;
+// pub mod document;
 pub mod elements;
-pub mod node;
+// pub mod node;
+
+mod document;
+mod node;
+
+pub use document::*;
+pub use node::*;

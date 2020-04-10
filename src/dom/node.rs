@@ -13,18 +13,23 @@ pub enum NodeData {
 
 #[allow(dead_code)]
 impl Node {
-    pub fn from_elem(elem: Elem) -> Self {
+    pub fn from(elem: Elem) -> Self {
         Self {
             data: NodeData::Elem(elem),
             children: vec![],
         }
     }
 
-    pub fn from_text(text: String) -> Self {
+    pub fn text(text: &str) -> Self {
         Self {
-            data: NodeData::Text(text),
+            data: NodeData::Text(text.to_string()),
             children: vec![],
         }
+    }
+
+    pub fn with_children(mut self, children: Vec<Node>) -> Self {
+        self.children = children;
+        self
     }
 
     pub fn get_data(&mut self) -> &mut NodeData {

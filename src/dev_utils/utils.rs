@@ -1,5 +1,5 @@
 use crate::cssom;
-use crate::dom::elements::Tag;
+use crate::dom;
 
 #[allow(unused_macros)]
 macro_rules! hashmap(
@@ -14,10 +14,58 @@ macro_rules! hashmap(
      };
 );
 
+pub fn get_document() {
+    use dom::elements::{Elem, Tag};
+    use dom::{Document, Node, NodeData};
+
+    let node = |tn: &str, chs: Vec<Node>| Node::from(Elem::from(tn)).with_children(chs);
+
+    let mut doc = Document::new().with_root(node(
+        "html",
+        vec![
+            node("head", vec![]),
+            node(
+                "body",
+                vec![
+                    node("nav", vec![]),
+                    node(
+                        "div",
+                        vec![
+                            node("h1", vec![Node::text("Some 1")]),
+                            node(
+                                "p",
+                                vec![
+                                    Node::text("This is "),
+                                    node("span", vec![Node::text("p tag")]),
+                                    Node::text("under div"),
+                                ],
+                            ),
+                            node("h1", vec![Node::text("Some 2")]),
+                            node("p", vec![Node::text("another p tag")]),
+                        ],
+                    ),
+                    node("footer", vec![]),
+                ],
+            ),
+        ],
+    ));
+
+    match doc.root {
+        Some(root) => match root.data {
+            NodeData::Elem(elem) => println!("Yes - {}", elem.tag == Tag::Html),
+            (_) => println!("No, No, No - 2"),
+        },
+        None => println!("No, No, No - 1"),
+    }
+
+    // doc
+}
+
 #[allow(dead_code)]
 pub fn get_stylesheet() -> cssom::StyleSheet {
     use cssom::properties::{Color, FontWeight, Measure, MeasureValue, Property};
     use cssom::{CSSRule, Decleration, Selector, StyleSheet};
+    use dom::elements::Tag;
 
     let rule_2 = CSSRule {
         declerations: vec![

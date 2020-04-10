@@ -11,6 +11,8 @@ fn try_join() {}
 fn main() {
     try_join();
 
+    dev_utils::get_document();
+
     // let mut dom = Document::new();
 
     // let html = String::from("<a href=\"https://wikipedia.com\">Wikipedia</a>");
