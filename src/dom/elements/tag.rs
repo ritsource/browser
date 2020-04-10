@@ -1,4 +1,5 @@
 #[allow(dead_code)]
+#[derive(Eq, PartialEq, Hash)]
 pub enum Tag {
     H1,
     H2,

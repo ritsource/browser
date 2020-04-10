@@ -1,24 +1,46 @@
+#[derive(Eq, PartialEq)]
 pub struct Integer(i32);
 
 #[allow(dead_code)]
+#[derive(Eq, PartialEq)]
 pub enum Measure {
-    Px(f64),
-    Percent(f64),
-    // Rem(f64),
+    Px(MeasureValue),
+    Percent(MeasureValue),
+    // Rem(MeasureFloat),
     Auto,
 }
 
-#[allow(dead_code)]
-pub struct Color(String);
+#[derive(Eq, PartialEq)]
+pub struct MeasureValue {
+    pub i: i32,
+    pub f: i32,
+}
 
 #[allow(dead_code)]
-impl Color {
-    pub fn to_hex(self) -> String {
-        self.0
+impl MeasureValue {
+    pub fn new(i: i32, f: i32) -> Self {
+        Self { i, f }
     }
 }
 
 #[allow(dead_code)]
+#[derive(Eq, PartialEq)]
+pub struct Color {
+    pub r: u8,
+    pub g: u8,
+    pub b: u8,
+    pub a: u8,
+}
+
+#[allow(dead_code)]
+impl Color {
+    pub fn new(r: u8, g: u8, b: u8, a: u8) -> Self {
+        Self { r, g, b, a }
+    }
+}
+
+#[allow(dead_code)]
+#[derive(Eq, PartialEq)]
 pub enum Property {
     AlignContent(AlignContent),
     AlignItems(AlignItems),
@@ -94,6 +116,7 @@ pub enum Property {
 }
 
 #[allow(dead_code)]
+#[derive(Eq, PartialEq)]
 pub enum AlignContent {
     Normal,
     Center,
@@ -106,6 +129,7 @@ pub enum AlignContent {
 }
 
 #[allow(dead_code)]
+#[derive(Eq, PartialEq)]
 pub enum AlignItems {
     Normal,
     Center,
@@ -116,6 +140,7 @@ pub enum AlignItems {
 }
 
 #[allow(dead_code)]
+#[derive(Eq, PartialEq)]
 pub enum AlignSelf {
     Auto,
     Normal,
@@ -127,6 +152,7 @@ pub enum AlignSelf {
 }
 
 #[allow(dead_code)]
+#[derive(Eq, PartialEq)]
 pub enum JustifyContent {
     Normal,
     Center,
@@ -138,6 +164,7 @@ pub enum JustifyContent {
 }
 
 #[allow(dead_code)]
+#[derive(Eq, PartialEq)]
 pub enum VerticalAlign {
     Middle,
     Top,
@@ -146,6 +173,7 @@ pub enum VerticalAlign {
 }
 
 #[allow(dead_code)]
+#[derive(Eq, PartialEq)]
 pub enum BorderStyle {
     Solid,
     Dotted,
@@ -154,6 +182,7 @@ pub enum BorderStyle {
 }
 
 #[allow(dead_code)]
+#[derive(Eq, PartialEq)]
 pub enum FontWeight {
     Normal,
     Bold,
@@ -161,6 +190,7 @@ pub enum FontWeight {
 }
 
 #[allow(dead_code)]
+#[derive(Eq, PartialEq)]
 pub enum TextAlign {
     Left,
     Right,
@@ -171,6 +201,7 @@ pub enum TextAlign {
 }
 
 #[allow(dead_code)]
+#[derive(Eq, PartialEq)]
 pub enum TextDecoration {
     Underline,
     LineThrough,
@@ -178,6 +209,7 @@ pub enum TextDecoration {
 }
 
 #[allow(dead_code)]
+#[derive(Eq, PartialEq)]
 pub enum Cursor {
     Default,
     Pointer,
@@ -185,6 +217,7 @@ pub enum Cursor {
 }
 
 #[allow(dead_code)]
+#[derive(Eq, PartialEq)]
 pub enum Display {
     Inline,
     InlineBlock,
@@ -193,7 +226,14 @@ pub enum Display {
     None,
 }
 
+impl Default for Display {
+    fn default() -> Display {
+        Display::Inline
+    }
+}
+
 #[allow(dead_code)]
+#[derive(Eq, PartialEq)]
 pub enum FlexDirection {
     Row,
     RowReverse,
@@ -203,11 +243,13 @@ pub enum FlexDirection {
 }
 
 #[allow(dead_code)]
+#[derive(Eq, PartialEq)]
 pub enum Opacity {
     Integer(Integer),
 }
 
 #[allow(dead_code)]
+#[derive(Eq, PartialEq)]
 pub enum Visibility {
     Visible,
     Hidden,
@@ -216,12 +258,14 @@ pub enum Visibility {
 }
 
 #[allow(dead_code)]
+#[derive(Eq, PartialEq)]
 pub enum OutlineStyle {
     Solid,
     Dashed,
 }
 
 #[allow(dead_code)]
+#[derive(Eq, PartialEq)]
 pub enum Overflow {
     Visible,
     Hidden,
@@ -230,6 +274,7 @@ pub enum Overflow {
 }
 
 #[allow(dead_code)]
+#[derive(Eq, PartialEq)]
 pub enum Position {
     Static,
     Relative,

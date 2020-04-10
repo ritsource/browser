@@ -1,29 +1,33 @@
 mod cssom;
 mod dom;
 
-use dom::document::Document;
-use dom::elements::Elem;
-use dom::node::Node;
+// use dom::document::Document;
+// use dom::elements::Elem;
+// use dom::node::Node;
+
+fn try_join() {}
 
 fn main() {
-    let mut dom = Document::new();
+    try_join();
 
-    let html = String::from("<a href=\"https://wikipedia.com\">Wikipedia</a>");
-    let elem = naive_parse(html);
+    // let mut dom = Document::new();
 
-    dom.add_root(Node::from_elem(elem));
+    // let html = String::from("<a href=\"https://wikipedia.com\">Wikipedia</a>");
+    // let elem = naive_parse(html);
+
+    // dom.add_root(Node::from_elem(elem));
 }
 
-fn naive_parse(_: String) -> Elem {
-    use dom::elements::Attributes;
-    use std::collections::HashMap;
+// fn naive_parse(_: String) -> Elem {
+//     use dom::elements::Attributes;
+//     use std::collections::HashMap;
 
-    let (tag_name, attr_map) = {
-        let mut hm: HashMap<String, String> = HashMap::new();
-        hm.insert("href".to_string(), "https://wikipedia.com".to_string());
+//     let (tag_name, attr_map) = {
+//         let mut hm: HashMap<String, String> = HashMap::new();
+//         hm.insert("href".to_string(), "https://wikipedia.com".to_string());
 
-        ("a", hm)
-    };
+//         ("a", hm)
+//     };
 
-    Elem::from(tag_name).with_attributes(Attributes::from(attr_map))
-}
+//     Elem::from(tag_name).with_attributes(Attributes::from(attr_map))
+// }
