@@ -17,13 +17,13 @@ pub enum Selector {
 
 #[allow(dead_code)]
 #[derive(Eq, PartialEq)]
-pub struct CSSRule<'a> {
+pub struct CSSRule {
     pub declerations: Vec<Decleration>,
-    pub parent: Option<HashMap<Selector, &'a CSSRule<'a>>>,
-    pub ancestor: Option<HashMap<Selector, &'a CSSRule<'a>>>,
+    pub parent: Option<HashMap<Selector, CSSRule>>,
+    pub ancestor: Option<HashMap<Selector, CSSRule>>,
 }
 
-#[allow(dead_code)]
+// #[allow(dead_code)]
 // impl<'a> CSSRule<'a> {
 //     pub fn from(
 //         declerations: Vec<Decleration>,
@@ -38,7 +38,7 @@ pub struct CSSRule<'a> {
 //     }
 // }
 
-impl Default for CSSRule<'_> {
+impl Default for CSSRule {
     fn default() -> Self {
         Self {
             declerations: vec![],
@@ -50,7 +50,7 @@ impl Default for CSSRule<'_> {
 
 #[allow(dead_code)]
 #[derive(Eq, PartialEq)]
-pub struct StyleSheet<'a>(HashMap<Selector, CSSRule<'a>>);
+pub struct StyleSheet<'a>(HashMap<Selector, &'a CSSRule>);
 
 #[allow(dead_code)]
 impl<'a> StyleSheet<'a> {
@@ -76,7 +76,7 @@ macro_rules! hashmap(
 pub fn join_fules() {}
 
 #[allow(dead_code)]
-pub fn get_test_stylesheet<'a>() -> StyleSheet<'a> {
+pub fn get_test_stylesheet<'a>() {
     let span = Selector::Tag(Tag::Span);
     let p = Selector::Tag(Tag::P);
     let div = Selector::Tag(Tag::Div);
@@ -84,13 +84,19 @@ pub fn get_test_stylesheet<'a>() -> StyleSheet<'a> {
 
     use properties::{Color, Measure, MeasureValue, Property};
 
+    let rule_1 = CSSRule {
+        declerations: vec![Decleration(Property::Background(Color::new(0, 0, 0, 1)))],
+        parent: None,
+        ancestor: None,
+    };
+
     // let rule_1 = CSSRule::from(
     //     vec![Decleration(Property::Background(Color::new(0, 0, 0, 1)))],
     //     None,
     //     None,
     // );
 
-    let rule_2 = CSSRule::<'a> {
+    let rule_2 = CSSRule {
         declerations: vec![
             Decleration(Property::MarginLeft(Measure::Px(MeasureValue::new(10, 0)))),
             Decleration(Property::MarginRight(Measure::Px(MeasureValue::new(10, 0)))),
@@ -109,18 +115,19 @@ pub fn get_test_stylesheet<'a>() -> StyleSheet<'a> {
 
     // let x: &'a CSSRule = &rule_1;
 
-    let rule_0 = CSSRule::<'a> {
+    let rule_0 = CSSRule {
         declerations: vec![Decleration(Property::Color(Color::new(255, 0, 0, 1)))],
         // parent: Some(hashmap! {Selector::Tag(Tag::Span) => CSSRule::from(
         //     vec![Decleration(Property::Background(Color::new(0, 0, 0, 1)))],
         //     None,
         //     None,
         // )}),
-        parent: None,
+        parent: Some(hashmap! {Selector::Tag(Tag::Span) => rule_1}),
+        // parent: None,
         ancestor: None,
     };
 
-    let rule_4 = CSSRule::<'a> {
+    let rule_4 = CSSRule {
         declerations: vec![
             Decleration(Property::Background(Color::new(255, 255, 0, 1))),
             Decleration(Property::Height(Measure::Px(MeasureValue::new(100, 0)))),
@@ -130,8 +137,8 @@ pub fn get_test_stylesheet<'a>() -> StyleSheet<'a> {
         ancestor: None,
     };
 
-    StyleSheet(hashmap! {
-        span => rule_0,
-        nav => rule_4
-    })
+    // StyleSheet(hashmap! {
+    //     span => rule_0,
+    //     nav => rule_4
+    // })
 }
