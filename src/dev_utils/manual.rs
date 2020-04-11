@@ -61,6 +61,7 @@ pub struct Text<'a> {
 #[allow(dead_code)]
 impl<'a> Text<'a> {
     fn render(&mut self, args: &RenderArgs, glyphs: &mut GlyphCache) {
+        use graphics::math::Scalar;
         use graphics::types::{Color, FontSize};
         use graphics::*;
 
@@ -69,11 +70,23 @@ impl<'a> Text<'a> {
         let content = self.content;
 
         let color = Color::from(self.color);
+        let background = self.background;
         let font_size = FontSize::from(self.font_size);
 
+        let r_height = f64::from(font_size);
+        let r_width: f64 = 100.0;
+
+        let r_x = x;
+        let r_y = y - r_height;
+
+        let rect = rectangle::rectangle_by_corners(0.0, 0.0, Scalar::from(r_width), Scalar::from(r_height));
+
         self.gl.draw(args.viewport(), |c, gl| {
-            let transform = c.transform.trans(x, y);
-            text(color, font_size, &content[..], glyphs, transform, gl).unwrap();
+            let tr = c.transform.trans(r_x, r_y);
+            let tt = c.transform.trans(x, y);
+
+            rectangle(background, rect, tr, gl);
+            text(color, font_size, &content[..], glyphs, tt, gl).unwrap();
         })
     }
 }
@@ -133,8 +146,8 @@ pub fn render() {
         if let Some(args) = e.render_args() {
             graphics::clear(WHITE, &mut GlGraphics::new(opengl));
 
-            rect_1.render(&args);
-            rect_2.render(&args);
+            // rect_1.render(&args);
+            // rect_2.render(&args);
             text_1.render(&args, &mut glyphs);
         }
     }
