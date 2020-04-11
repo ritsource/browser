@@ -14,13 +14,14 @@ macro_rules! hashmap(
      };
 );
 
-pub fn get_document() {
-    use dom::elements::{Elem, Tag};
-    use dom::{Document, Node, NodeData};
+#[allow(dead_code)]
+pub fn get_document() -> dom::Document {
+    use dom::elements::Elem;
+    use dom::{Document, Node};
 
     let node = |tn: &str, chs: Vec<Node>| Node::from(Elem::from(tn)).with_children(chs);
 
-    let mut doc = Document::new().with_root(node(
+    Document::new().with_root(node(
         "html",
         vec![
             node("head", vec![]),
@@ -48,17 +49,7 @@ pub fn get_document() {
                 ],
             ),
         ],
-    ));
-
-    match doc.root {
-        Some(root) => match root.data {
-            NodeData::Elem(elem) => println!("Yes - {}", elem.tag == Tag::Html),
-            (_) => println!("No, No, No - 2"),
-        },
-        None => println!("No, No, No - 1"),
-    }
-
-    // doc
+    ))
 }
 
 #[allow(dead_code)]
