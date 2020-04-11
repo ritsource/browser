@@ -23,6 +23,17 @@ pub struct Rect {
 
 #[allow(dead_code)]
 impl Rect {
+    pub fn new(background: [f32; 4], height: f64, width: f64, x: f64, y: f64) -> Self {
+        Self {
+            gl: GlGraphics::new(OpenGL::V3_2),
+            background,
+            height,
+            width,
+            x,
+            y,
+        }
+    }
+
     fn render(&mut self, args: &RenderArgs) {
         use graphics::math::Scalar;
         use graphics::*;
@@ -60,6 +71,17 @@ pub struct Text<'a> {
 
 #[allow(dead_code)]
 impl<'a> Text<'a> {
+    pub fn new(content: &'a str, color: [f32; 4], background: [f32; 4], font_size: u32, x: f64, y: f64) -> Self {
+        Self {
+            gl: GlGraphics::new(OpenGL::V3_2),
+            content,
+            color,
+            background,
+            font_size,
+            x,
+            y,
+        }
+    }
     fn render(&mut self, args: &RenderArgs, glyphs: &mut GlyphCache) {
         use graphics::math::Scalar;
         use graphics::types::{Color, FontSize};
@@ -74,7 +96,7 @@ impl<'a> Text<'a> {
         let font_size = FontSize::from(self.font_size);
 
         let r_height = f64::from(font_size);
-        let r_width: f64 = 100.0;
+        let r_width: f64 = f64::from(font_size * 47 / 100 * self.content.len() as u32);
 
         let r_x = x;
         let r_y = y - r_height;
@@ -104,38 +126,52 @@ pub fn render() {
     const RED: [f32; 4] = [1.0, 0.0, 0.0, 1.0];
     const GREEN: [f32; 4] = [0.0, 1.0, 0.0, 1.0];
     const BLUE: [f32; 4] = [0.0, 0.0, 1.0, 1.0];
+    const YELLOW: [f32; 4] = [1.0, 1.0, 0.0, 1.0];
+    const BLACK: [f32; 4] = [0.0, 0.0, 0.0, 1.0];
     const WHITE: [f32; 4] = [1.0, 1.0, 1.0, 1.0];
+    const TRANSPARENT: [f32; 4] = [1.0, 1.0, 1.0, 0.0];
 
-    let mut rect_1 = Rect {
-        gl: GlGraphics::new(opengl),
-        background: RED,
-        height: 100.0,
-        width: 100.0,
-        x: 0.0,
-        y: 0.0,
-    };
+    const H1_FONT_SIZE: u32 = 35;
+    const P_FONT_SIZE: u32 = 16;
 
-    let mut rect_2 = Rect {
-        gl: GlGraphics::new(opengl),
-        background: GREEN,
-        height: 100.0,
-        width: 100.0,
-        x: 120.0,
-        y: 120.0,
-    };
+    let mut rect_1 = Rect::new(GREEN, 100.0, 100.0, 0.0, 0.0);
+    let mut rect_2 = Rect::new(GREEN, 100.0, 100.0, 120.0, 120.0);
 
-    let mut text_1 = Text {
-        gl: GlGraphics::new(opengl),
-        content: "Hello world!",
-        color: BLUE,
-        background: GREEN,
-        font_size: 30,
-        x: 120.0,
-        y: 120.0,
-    };
+    let mut text_1 = Text::new(
+        "Some 1",
+        BLACK,
+        TRANSPARENT,
+        P_FONT_SIZE,
+        0.0,
+        100.0 + H1_FONT_SIZE as f64,
+    );
+    let mut text_2 = Text::new(
+        "this is p tag under div",
+        BLACK,
+        TRANSPARENT,
+        P_FONT_SIZE,
+        0.0,
+        100.0 + (H1_FONT_SIZE * 2) as f64 + P_FONT_SIZE as f64,
+    );
+    let mut text_3 = Text::new(
+        "Some 2",
+        BLACK,
+        TRANSPARENT,
+        P_FONT_SIZE,
+        0.0,
+        100.0 + (H1_FONT_SIZE * 2) as f64 + (P_FONT_SIZE * 2) as f64,
+    );
+    let mut text_4 = Text::new(
+        "another p tag",
+        BLACK,
+        TRANSPARENT,
+        P_FONT_SIZE,
+        0.0,
+        100.0 + (H1_FONT_SIZE * 3) as f64 + (P_FONT_SIZE * 2) as f64,
+    );
 
     let mut glyphs = GlyphCache::new(
-        PathBuf::from("Comic_Neue/ComicNeue-Regular.ttf"),
+        PathBuf::from("Noto_Serif/NotoSerif-Regular.ttf"),
         (),
         TextureSettings::new(),
     )
@@ -146,9 +182,12 @@ pub fn render() {
         if let Some(args) = e.render_args() {
             graphics::clear(WHITE, &mut GlGraphics::new(opengl));
 
-            // rect_1.render(&args);
+            rect_1.render(&args);
             // rect_2.render(&args);
             text_1.render(&args, &mut glyphs);
+            text_2.render(&args, &mut glyphs);
+            text_3.render(&args, &mut glyphs);
+            text_4.render(&args, &mut glyphs);
         }
     }
 }
