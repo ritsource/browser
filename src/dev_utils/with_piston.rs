@@ -108,7 +108,11 @@ impl<'a> Text<'a> {
             let tt = c.transform.trans(x, y);
 
             rectangle(background, rect, tr, gl);
-            text(color, font_size, &content[..], glyphs, tt, gl).unwrap();
+
+            text::Text::new_color(color, font_size)
+                // .round()
+                .draw(&content, glyphs, &c.draw_state, tt, gl)
+                .unwrap();
         })
     }
 }
@@ -141,7 +145,7 @@ pub fn render() {
         "Some 1",
         BLACK,
         TRANSPARENT,
-        P_FONT_SIZE,
+        H1_FONT_SIZE,
         0.0,
         100.0 + H1_FONT_SIZE as f64,
     );
@@ -151,15 +155,15 @@ pub fn render() {
         TRANSPARENT,
         P_FONT_SIZE,
         0.0,
-        100.0 + (H1_FONT_SIZE * 2) as f64 + P_FONT_SIZE as f64,
+        100.0 + H1_FONT_SIZE as f64 + P_FONT_SIZE as f64,
     );
     let mut text_3 = Text::new(
         "Some 2",
         BLACK,
         TRANSPARENT,
-        P_FONT_SIZE,
+        H1_FONT_SIZE,
         0.0,
-        100.0 + (H1_FONT_SIZE * 2) as f64 + (P_FONT_SIZE * 2) as f64,
+        100.0 + (H1_FONT_SIZE * 2) as f64 + P_FONT_SIZE as f64,
     );
     let mut text_4 = Text::new(
         "another p tag",
@@ -167,7 +171,7 @@ pub fn render() {
         TRANSPARENT,
         P_FONT_SIZE,
         0.0,
-        100.0 + (H1_FONT_SIZE * 3) as f64 + (P_FONT_SIZE * 2) as f64,
+        100.0 + (H1_FONT_SIZE * 2) as f64 + (P_FONT_SIZE * 2) as f64,
     );
 
     let mut glyphs = GlyphCache::new(
